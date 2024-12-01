@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca del Proyecto</title>
+    <link rel="stylesheet" href="about.css">
+</head>
+
+<body class="day">
+<!-- Contenedor principal -->
+<div class="page-wrapper">
+    <!-- Header -->
+    <header>
+        <h1>Acerca del Proyecto</h1>
+    </header>
+
+    <!-- Sección sobre el proyecto -->
+    <div class="about-project">
+        <h2>¿Qué es WeatherApp?</h2>
+        <p>WeatherApp es una aplicación web que proporciona información meteorológica en tiempo real. A través de la API de OpenWeatherMap, los usuarios pueden obtener datos detallados sobre el clima en cualquier ciudad del mundo.</p>
+
+        <h2>Objetivos del Proyecto</h2>
+        <ul>
+            <li>Brindar información meteorológica precisa y actualizada.</li>
+            <li>Proveer una interfaz intuitiva y fácil de usar.</li>
+            <li>Asegurar que la aplicación sea accesible desde dispositivos móviles y de escritorio.</li>
+        </ul>
+
+        <h2>Tecnologías Utilizadas</h2>
+        <ul>
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+            <li>API OpenWeatherMap</li>
+        </ul>
+
+        <h2>Créditos</h2>
+        <p>Los datos meteorológicos son proporcionados por la API de OpenWeatherMap. El diseño y desarrollo de la aplicación fue realizado por nuestro equipo.</p>
+
+        <h2>Desarrollador</h2>
+        <p>Desarrollado por <a href="https://github.com/tunombre" target="_blank">Tu Nombre</a></p>
+    </div>
+
+    <!-- Footer con botón para volver -->
+    <footer>
+        <div class="footer-content">
+            <button onclick="window.history.back()">Volver</button>
+        </div>
+    </footer>
+</div>
+
+<!-- JavaScript Anexado -->
+<script>
+    window.addEventListener('load', () => {
+        const pageWrapper = document.querySelector('.page-wrapper');
+        pageWrapper.classList.add('loaded');
+    });
+</script>
+</body>
+
+</html>
