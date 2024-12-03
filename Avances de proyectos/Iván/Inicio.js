@@ -1,153 +1,92 @@
-// Función para alternar el menú responsivo
+const apiKey = "3782fa8c329f6163cf1c5bce8b501cc1";
+
+// Mostrar/Ocultar menú
 function toggleMenu() {
-    const sidebar = document.getElementById("sidebar");
-    sidebar.classList.toggle("active");
+    const menu = document.getElementById("menu");
+    menu.classList.toggle("hidden");
 }
 
-// Función para ocultar la pantalla de bienvenida y mostrar la aplicación
-window.addEventListener("load", () => {
-    const welcomeScreen = document.getElementById("welcome-screen");
-    const pageWrapper = document.querySelector(".page-wrapper");
+// Detectar ubicación automáticamente
+window.onload = () => {
+    if (!sessionStorage.getItem("loggedIn")) {
+        alert("Debes iniciar sesión primero.");
+        window.location.href = "login.html";
+    } else {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                fetchWeatherByCoords(latitude, longitude);
+            },
+            () => alert("No se pudo obtener tu ubicación. Usa el buscador.")
+        );
+    }
+};
 
-    setTimeout(() => {
-        welcomeScreen.style.display = "none";
-        pageWrapper.classList.add("loaded");
-    }, 5000); // 3 segundos
-});
-
-// Función para buscar el clima
+// Buscar clima por ciudad
 function searchWeather() {
-    const locationInput = document.getElementById("location");
-    const location = locationInput.value.trim();
-
-    if (!location) {
-        alert("Por favor, ingresa el nombre de una ciudad.");
-        return;
-    }
-
-    fetchWeather(location);
+    const location = document.getElementById("location").value.trim();
+    if (!location) return alert("Por favor, escribe una ciudad.");
+    fetchWeatherByCity(location);
 }
 
-// Función para obtener datos del clima
-async function fetchWeather(location) {
-    const apiKey = "3782fa8c329f6163cf1c5bce8b501cc1"; // Reemplaza con tu API Key
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&lang=es&appid=${apiKey}`;
-
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error("Ciudad no encontrada");
-        }
-
-        const weatherData = await response.json();
-        displayWeather(weatherData);
-    } catch (error) {
-        alert(error.message);
-    }
+// Obtener clima por coordenadas
+function fetchWeatherByCoords(lat, lon) {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=es&appid=${apiKey}`)
+        .then(response => response.json())
+        .then(data => updateWeatherCard(data))
+        .catch(() => alert("Error al obtener el clima. Intenta nuevamente."));
 }
 
-// Función para capitalizar la primera letra de cada palabra
-function capitalizeFirstLetter(str) {
-    return str
-        .split(' ') // Divide la cadena por los espacios
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitaliza la primera letra de cada palabra
-        .join(' '); // Vuelve a unir las palabras
+// Obtener clima por ciudad
+function fetchWeatherByCity(city) {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=es&appid=${apiKey}`)
+        .then(response => response.json())
+        .then(data => updateWeatherCard(data))
+        .catch(() => alert("Ciudad no encontrada. Verifica el nombre e intenta de nuevo."));
 }
 
-// Función para mostrar la información del clima
-function displayWeather(data) {
-    const weatherContainer = document.getElementById("weather");
+// Actualizar la tarjeta con los datos del clima
+function updateWeatherCard(data) {
+    const card = document.getElementById("weather-card");
+    const icon = document.getElementById("weather-icon");
 
-    const {
-        name,
-        sys: { country },
-        weather: [{ description, icon }],
-        main: { temp, temp_min, temp_max },
-        wind: { speed },
-    } = data;
+    document.getElementById("city-name").textContent = `${data.name}, ${data.sys.country}`;
+    document.getElementById("local-time").textContent = `Hora local: ${getLocalTime(data.timezone)}`;
+    document.getElementById("description").textContent = data.weather[0].description;
+    document.getElementById("temperature").textContent = `Temperatura: ${data.main.temp}°C`;
+    document.getElementById("temp-range").textContent = `Min: ${data.main.temp_min}°C / Max: ${data.main.temp_max}°C`;
+    document.getElementById("wind-speed").textContent = `Viento: ${data.wind.speed} m/s`;
 
-    // Capitalizamos el description
-    const capitalizedDescription = capitalizeFirstLetter(description);
+    icon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+    icon.classList.remove("hidden");
+    card.classList.remove("hidden");
 
-    // Convertimos la velocidad del viento de m/s a km/h
-    const windSpeedKmH = (speed * 3.6).toFixed(1); // Redondeamos a un decimal
-
-    const weatherHTML = `
-        <div class="weather-card">
-            <h2>${name}, ${country}</h2>
-            <img class="weather-icon" src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${description}">
-            <p class="description">${capitalizedDescription}</p>
-            <p class="temperature">${temp}°C</p>
-            <p>Máx: ${temp_max}°C / Mín: ${temp_min}°C</p>
-            <p>Viento: ${windSpeedKmH} km/h</p> <!-- Aquí mostramos la velocidad en km/h -->
-        </div>
-    `;
-
-    weatherContainer.innerHTML = weatherHTML;
-
-    // Cambiar el fondo dependiendo del clima
-    changeBackground(capitalizedDescription);
+    // Cambiar colores según el clima
+    const weather = data.weather[0].main.toLowerCase();
+    changeBackgroundColor(weather);
 }
 
-// Función para cambiar el fondo de la aplicación
-function changeBackground(description) {
+// Obtener la hora local basada en la zona horaria
+function getLocalTime(timezoneOffset) {
+    const localTime = new Date(new Date().getTime() + timezoneOffset * 1000);
+    return localTime.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+}
+
+// Cambiar fondo dinámicamente según el clima
+function changeBackgroundColor(weather) {
     const body = document.body;
-    body.className = ""; // Eliminar todas las clases previas
+    body.className = ""; // Reinicia las clases de fondo
 
-    if (description.includes("nieve")) {
-        body.classList.add("snowy");
-    } else if (description.includes("lluvia") || description.includes("chubasco")) {
-        body.classList.add("rainy");
-    } else if (description.includes("nubes")) {
-        body.classList.add("cloudy");
-    } else if (description.includes("cielo claro")) {
-        body.classList.add("sunny");
-    } else {
-        body.classList.add("clear");
-    }
+    if (weather.includes("cloud")) body.classList.add("cloudy");
+    else if (weather.includes("rain")) body.classList.add("rainy");
+    else if (weather.includes("snow")) body.classList.add("snowy");
+    else if (weather.includes("clear")) body.classList.add("clear");
+    else if (weather.includes("sun")) body.classList.add("sunny");
+    else body.classList.add("day");
 }
 
-// Función para obtener la ubicación en tiempo real
-function getUserLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-
-            // Usamos las coordenadas para obtener el clima
-            fetchWeatherByCoordinates(latitude, longitude);
-        }, function() {
-            alert("No se pudo obtener la ubicación.");
-        });
-    } else {
-        alert("La geolocalización no es compatible con este navegador.");
-    }
-}
-
-// Función para obtener los datos del clima usando las coordenadas
-async function fetchWeatherByCoordinates(lat, lon) {
-    const apiKey = "3782fa8c329f6163cf1c5bce8b501cc1"; // Reemplaza con tu API Key
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=es&appid=${apiKey}`;
-
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error("No se pudo obtener el clima.");
-        }
-
-        const weatherData = await response.json();
-        displayWeather(weatherData);
-    } catch (error) {
-        alert(error.message);
-    }
-}
-
-// Función de cierre de sesión
+// Función de logout
 function logout() {
-    alert("Sesión cerrada.");
-    // Aquí podrías redirigir al usuario a una página de inicio de sesión, por ejemplo:
+    sessionStorage.removeItem("loggedIn");
     window.location.href = "login.html";
 }
-
-// Llamamos a la función para obtener la ubicación cuando se carga la página
-window.addEventListener("load", getUserLocation);
