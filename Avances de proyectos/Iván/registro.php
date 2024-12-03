@@ -11,12 +11,15 @@
 <body>
 <div class="login-container">
     <h1>Registro</h1>
-    <form action="registro.php" method="POST">
+    <?php if (isset($_GET['error'])): ?>
+        <p class="error-message"><?= htmlspecialchars($_GET['error']) ?></p>
+    <?php endif; ?>
+    <form action="procesar_registro.php" method="POST">
         <input type="text" name="usuario" placeholder="Usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
         <button type="submit">Registrarse</button>
     </form>
-    <a href="login.html">¿Ya tienes cuenta? Inicia sesión</a>
+    <a href="index.php">¿Ya tienes cuenta? Inicia sesión</a>
 </div>
 </body>
 </html>
