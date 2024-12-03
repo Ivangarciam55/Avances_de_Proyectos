@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Obtener los datos del formulario
     $usuario = $conn->real_escape_string($_POST['usuario']);
-    $password = $_POST['pass'];
+    $password = $_POST['password'];
 
     // Consultar en la base de datos
     $query = "SELECT * FROM registro WHERE usuario = '$usuario'";
@@ -26,9 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-
-        // Verificar la contraseña
-        if (password_verify($password, $row['pass'])) {
+        if (password_verify($_POST['password'], $row['pass'])) {
             header("Location: Inicio.html");
             exit();
         } else {
@@ -37,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         $error = "Usuario no encontrado.";
     }
+
 
     // Cerrar conexión
     $conn->close();
