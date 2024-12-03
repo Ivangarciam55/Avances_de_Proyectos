@@ -1,72 +1,114 @@
+<?php
+// login.php
+
+session_start();
+
+// Configuración de conexión a la base de datos
+$host = 'localhost';  // Cambia por tu host si es necesario
+$dbname = 'weatherapp';
+$username = 'root';   // Cambia por tu usuario de MySQL
+$password = '';       // Cambia por tu contraseña de MySQL
+
+// Conexión con PDO
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+die("Error de conexión: " . $e->getMessage());
+}
+
+// Validación del formulario de inicio de sesión
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+// Validar que los campos no estén vacíos
+if (empty($username) || empty($password)) {
+$error = "Por favor, ingrese usuario y contraseña.";
+} else {
+// Consultar el usuario y la contraseña en la base de datos
+$stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
+$stmt->bindParam(':username', $username);
+$stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Verificar la contraseña
+if ($user && password_verify($password, $user['password'])) {
+// Iniciar sesión y redirigir
+$_SESSION['user_id'] = $user['id'];
+$_SESSION['username'] = $user['username'];
+header("Location: dashboard.html");  // Cambia por la página que deseas mostrar después del login
+exit();
+} else {
+$error = "Usuario o contraseña incorrectos.";
+}
+}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <title>Weather App</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Inicio de sesión</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f2f2f2;
+    }
+    .login-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    .error {
+      color: red;
+      text-align: center;
+    }
+  </style>
 </head>
-
 <body>
-<!-- Menú de navegación -->
-<nav id="sidebar">
-  <ul>
-    <li><a href="#">Inicio</a></li>
-    <li><a href="about.html">A cerca de</a></li>
-    <li><a href="#">Pronóstico</a></li>
-    <li><a href="#">Contactos</a></li>
-  </ul>
-</nav>
 
-<!-- Contenedor de la animación de bienvenida -->
-<div id="welcome-screen">
-  <h2>Bienvenido a la Weather App</h2>
+<div class="login-container">
+  <h2>Iniciar sesión</h2>
+  <?php if (isset($error)) { echo "<div class='error'>$error</div>"; } ?>
+<form action="login.php" method="POST">
+  <input type="text" name="username" placeholder="Usuario" required>
+  <input type="password" name="password" placeholder="Contraseña" required>
+  <input type="submit" value="Iniciar sesión">
+</form>
 </div>
 
-<div class="page-wrapper">
-  <!-- Header -->
-  <header>
-    <div class="header-content">
-      <h1>Weather App</h1>
-      <!-- Botón del menú responsivo -->
-      <button class="menu-btn" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </header>
-
-  <!-- Contenido principal -->
-  <main class="weather-app">
-    <!-- Información del clima -->
-    <section id="weather-info">
-      <div id="weather">
-        <p>Esperando información del clima...</p>
-      </div>
-    </section>
-
-    <!-- Barra de búsqueda -->
-    <section id="location-input">
-      <label for="location">Busca tu ciudad:</label>
-      <div class="search-wrapper">
-        <input type="text" id="location" placeholder="Ingresa el nombre de la ciudad">
-        <button onclick="searchWeather()">Obtener el clima</button>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <p>&copy; 2024 Ivan García - Todos los derechos reservados</p>
-    </div>
-  </footer>
-</div>
-
-<script src="index.js"></script>
 </body>
-
 </html>

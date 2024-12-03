@@ -1,0 +1,84 @@
+/* Estilo general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ecf0f1;
+}
+
+.login-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #f39c12;
+    outline: none;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #f39c12;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #e67e22;
+    transform: scale(1.05);
+}
+
+.footer-text {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-text a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}

@@ -12,7 +12,7 @@ window.addEventListener("load", () => {
     setTimeout(() => {
         welcomeScreen.style.display = "none";
         pageWrapper.classList.add("loaded");
-    }, 10000); // 10 segundos
+    }, 5000); // 3 segundos
 });
 
 // Función para buscar el clima

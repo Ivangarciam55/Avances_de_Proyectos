@@ -4,50 +4,34 @@
     padding: 0;
     box-sizing: border-box;
 }
+#titulo {
+    color: #ffffff;
+}
 
 body {
     font-family: "Roboto", sans-serif;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;  /* Asegura que el contenido ocupe al menos el 100% de la altura de la ventana */
     background-color: #ecf0f1;
-    overflow: hidden;
+    overflow: auto; /* Permite que la página haga scroll si es necesario */
 }
 
 /* Fondos y colores */
-.day {
-    background-color: #87CEFA; /* Azul claro para el día */
-}
-
-.sunny {
-    background-image: linear-gradient(to right, #f39c12, #f1c40f); /* Gradiente soleado */
-}
-
-.cloudy {
-    background-color: #bdc3c7; /* Gris para nublado */
-}
-
-.rainy {
-    background-color: #3498db; /* Azul para lluvia */
-}
-
-.snowy {
-    background-color: #ecf0f1; /* Blanco para nieve */
-}
-
-.clear {
-    background-color: #f39c12; /* Soleado claro */
+.light-theme {
+    background-color: #ecf0f1; /* Gris claro como fondo principal */
 }
 
 /* Diseño del contenedor principal */
 .page-wrapper {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100%;  /* Asegura que el contenedor ocupe toda la altura de la ventana */
     opacity: 0;
     transition: opacity 1s ease-in-out;
     padding: 20px;
     text-align: center;
+    overflow-y: auto; /* Habilita el scroll en caso de que el contenido sea largo */
 }
 
 /* Cuando la animación termina, mostramos el contenido */
@@ -57,7 +41,7 @@ body {
 
 /* Estilo de la cabecera */
 header {
-    background-color: #2c3e50;
+    background-color: #2c3e50; /* Color oscuro para el encabezado */
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -66,7 +50,7 @@ header {
 /* Estilo de los títulos */
 h1, h2 {
     font-size: 2em;
-    color: #2c3e50;
+    color: #2c3e50; /* Tono oscuro para los encabezados */
     margin-bottom: 20px;
 }
 
@@ -75,6 +59,10 @@ h1, h2 {
     flex-grow: 1;
     padding: 20px;
     text-align: left;
+    background-color: #ffffff; /* Fondo blanco para las secciones de contenido */
+    border-radius: 8px;  /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 20px;
 }
 
 ul {
@@ -90,7 +78,7 @@ ul li {
 
 /* Estilo del footer */
 footer {
-    background-color: #2c3e50;
+    background-color: #2c3e50; /* Fondo oscuro en el pie de página */
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -104,17 +92,18 @@ footer {
 }
 
 .footer-content button {
-    background-color: #f39c12;
+    background-color: #f39c12; /* Amarillo cálido para el botón */
     color: white;
     border: none;
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .footer-content button:hover {
-    background-color: #e67e22;
+    background-color: #e67e22; /* Un tono más oscuro al pasar el cursor */
 }
 
 .footer-content p {
@@ -124,6 +113,10 @@ footer {
 .footer-content a {
     color: #fff;
     text-decoration: none;
+}
+
+.footer-content a:visited {
+    color: #fff; /* Mantén el color blanco incluso si el enlace ha sido visitado */
 }
 
 .footer-content a:hover {

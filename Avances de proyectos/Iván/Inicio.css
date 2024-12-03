@@ -10,38 +10,41 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: #ecf0f1;
     overflow: hidden;
+    transition: background 0.5s ease-in-out;
 }
 
-/* Fondos para distintos climas y momentos del día */
-.day {
-    background-color: #87CEFA; /* Azul claro para el día */
+/* Estilos dinámicos para fondos */
+body.day {
+    background: linear-gradient(to bottom, #87CEEB, #FFD700); /* Amanecer o día claro */
 }
 
-.night {
-    background-color: #2c3e50; /* Oscuro para la noche */
+body.night {
+    background: linear-gradient(to bottom, #2C3E50, #4B79A1); /* Atardecer o noche */
 }
 
-.sunny {
-    background-image: linear-gradient(to right, #f39c12, #f1c40f); /* Gradiente soleado */
+body.sunny {
+    background: linear-gradient(to bottom, #F39C12, #FFD700); /* Día soleado */
 }
 
-.cloudy {
-    background-color: #bdc3c7; /* Gris para nublado */
+body.cloudy {
+    background: linear-gradient(to bottom, #BFC9CA, #AAB7B8); /* Cielo nublado */
 }
 
-.rainy {
-    background-color: #3498db; /* Azul para lluvia */
+body.rainy {
+    background: linear-gradient(to bottom, #5D6D7E, #2874A6); /* Día lluvioso */
 }
 
-.snowy {
-    background-color: #ecf0f1; /* Blanco para nieve */
+body.snowy {
+    background: linear-gradient(to bottom, #ECF0F1, #BDC3C7); /* Día nevado */
 }
 
-.clear {
-    background-color: #f39c12; /* Soleado claro */
+body.clear {
+    background: linear-gradient(to bottom, #2C3E50, #F7DC6F); /* Cielo despejado */
 }
+
+/* Otros estilos sin cambios */
+
 
 /* Estilos del menú */
 nav {
@@ -281,7 +284,13 @@ header h1 {
     height: 80px;
     margin: 10px 0;
     animation: bounce 1.5s infinite;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)); /* Sombra para mejor visibilidad */
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+    border-radius: 50%; /* Forma circular */
+    padding: 10px; /* Espacio interno para separar el icono del borde */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra del contenedor */
 }
+
 
 /* Footer */
 footer {

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explicación del Clima</title>
+  <style>
+    /* Estilo general */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Roboto", sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #ecf0f1;
+      color: #2c3e50;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      animation: slideDown 1s ease-out;
+    }
+
+    h1, h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      text-align: left;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      max-width: 800px;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: appear 1.5s ease-in-out forwards;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    footer {
+      background-color: #2c3e50;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .footer-button {
+      background-color: #f39c12;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      animation: popIn 1s ease forwards;
+    }
+
+    .footer-button:hover {
+      background-color: #e67e22;
+      transform: scale(1.05);
+    }
+
+    a {
+      color: #f39c12;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:visited {
+      color: #f39c12;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #e67e22;
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      0% { transform: translateY(-100%); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes appear {
+      0% { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+  <h1>Explicación del Clima</h1>
+</header>
+
+<!-- Contenido Principal -->
+<div class="content">
+  <h2>¿Qué es el Clima?</h2>
+  <p>El clima se refiere a las condiciones atmosféricas promedio que predominan en una región durante un período prolongado. Estas condiciones incluyen temperatura, precipitación, humedad, viento y presión atmosférica.</p>
+
+  <h2>Factores que Influyen en el Clima</h2>
+  <ul>
+    <li><strong>Latitud:</strong> Afecta la cantidad de energía solar que recibe una región.</li>
+    <li><strong>Altitud:</strong> A mayor altitud, menor temperatura.</li>
+    <li><strong>Cercanía al mar:</strong> Las áreas cercanas al mar tienen climas más moderados.</li>
+    <li><strong>Corrientes oceánicas:</strong> Influyen en la temperatura y la humedad.</li>
+  </ul>
+
+  <h2>Importancia del Estudio del Clima</h2>
+  <p>Entender el clima es esencial para predecir fenómenos naturales, planificar actividades agrícolas, diseñar infraestructuras y mitigar los efectos del cambio climático.</p>
+</div>
+
+<!-- Footer -->
+<footer>
+  <button class="footer-button" onclick="window.location.href='Inicio.html'">Volver al Inicio</button>
+</footer>
+</body>
+</html>

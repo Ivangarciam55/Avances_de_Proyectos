@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctenos</title>
+    <!-- Enlace a Font Awesome para íconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilo general */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Roboto", sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1, h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            text-align: left;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 800px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .link-container a {
+            display: flex;
+            align-items: center;
+            background-color: #f39c12;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: popIn 0.5s ease forwards;
+        }
+
+        .link-container a:hover {
+            background-color: #e67e22;
+            transform: translateY(-5px);
+        }
+
+        .link-container a i {
+            margin-right: 15px;
+            font-size: 24px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .footer-button {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-button:hover {
+            background-color: #e67e22;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateX(-100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Contáctenos</h1>
+</header>
+
+<div class="content">
+    <h2>Medios de Contacto</h2>
+    <p>Puedes contactarnos a través de los siguientes medios:</p>
+    <div class="link-container">
+        <a href="https://www.facebook.com" target="_blank">
+            <i class="fab fa-facebook-square"></i> Facebook
+        </a>
+        <a href="https://www.whatsapp.com" target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <a href="mailto:contacto@ejemplo.com">
+            <i class="fas fa-envelope"></i> Correo Electrónico
+        </a>
+        <a href="tel:+1234567890">
+            <i class="fas fa-phone-alt"></i> Llamada Telefónica
+        </a>
+        <a href="index.html">
+            <i class="fas fa-home"></i> Volver al Inicio
+        </a>
+    </div>
+</div>
+
+<footer>
+    <button class="footer-button" onclick="window.location.href='Inicio.html';">Volver al inicio</button>
+</footer>
+</body>
+</html>
