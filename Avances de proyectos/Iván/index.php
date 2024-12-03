@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
     <style>
-        /* Diseño basado en tu proyecto */
         body {
             font-family: "Roboto", sans-serif;
             display: flex;
@@ -13,27 +12,29 @@
             align-items: center;
             min-height: 100vh;
             background-color: #ecf0f1;
+            margin: 0;
         }
 
         .login-container {
             background-color: #ffffff;
-            padding: 20px;
+            padding: 25px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 100%;
+            width: 90%;
             max-width: 400px;
         }
 
         .login-container h1 {
             color: #2c3e50;
             margin-bottom: 20px;
+            font-size: 1.8rem;
         }
 
         .login-container input[type="text"],
         .login-container input[type="password"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 15px;
             border: 1px solid #bdc3c7;
             border-radius: 5px;
@@ -44,7 +45,7 @@
             background-color: #f39c12;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px;
             font-size: 16px;
             cursor: pointer;
             border-radius: 5px;
@@ -61,6 +62,7 @@
             margin-top: 15px;
             color: #3498db;
             text-decoration: none;
+            font-size: 14px;
         }
 
         .login-container a:hover {
