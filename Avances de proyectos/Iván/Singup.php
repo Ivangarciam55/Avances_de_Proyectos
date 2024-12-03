@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $query = "INSERT INTO registro (usuario, pass) VALUES ('$usuario', '$password')";
 
     if ($conn->query($query) === TRUE) {
-        header("Location: Login.php"); // Redirigir al inicio de sesión
+        header("Location: Index.php"); // Redirigir al inicio de sesión
         exit();
     } else {
         $error = "Error al registrar el usuario: " . $conn->error;
@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="password" name="password" placeholder="Contraseña" required>
         <button type="submit">Registrarse</button>
     </form>
-    <p>¿Ya tienes cuenta? <a href="Login.php">Inicia sesión</a></p>
+    <p>¿Ya tienes cuenta? <a href="Index.php">Inicia sesión</a></p>
 </div>
 </body>
 </html>
