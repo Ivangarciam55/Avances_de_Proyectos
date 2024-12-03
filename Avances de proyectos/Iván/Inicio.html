@@ -16,7 +16,7 @@
 <nav id="sidebar" class="nav-menu">
   <ul>
     <li><a href="about.html">Acerca de</a></li>
-    <li><a href="Explicacion.html">Explicacion del clima</a></li>
+    <li><a href="Explicacion.html">Explicación del clima</a></li>
     <li><a href="Contact.html">Contactos</a></li>
   </ul>
 </nav>
@@ -35,6 +35,8 @@
       <button class="menu-btn" onclick="toggleMenu()">
         <i class="fas fa-bars"></i>
       </button>
+      <!-- Botón de cierre de sesión -->
+      <button id="logout-btn" onclick="logout()">Cerrar sesión</button>
     </div>
   </header>
 
@@ -60,12 +62,21 @@
   <!-- Footer -->
   <footer>
     <div class="footer-content">
-      <p>&copy; 2024 Ivan García - Todos los derechos reservados </p>
+      <p>&copy; 2024 Ivan García - Todos los derechos reservados</p>
     </div>
   </footer>
 </div>
 
-<script src="Inicio.js"></script>
+<script>
+  // Función para cerrar sesión con animación
+  function logout() {
+    const logoutButton = document.getElementById('logout-btn');
+    logoutButton.classList.add('logout-animation');
+    setTimeout(() => {
+      window.location.href = 'index.php'; // Redirige al login después de la animación
+    }, 1000);
+  }
+</script>
 </body>
 
 </html>
