@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Obtener los datos del formulario
     $usuario = $conn->real_escape_string($_POST['usuario']);
-    $password = $_POST['password'];
+    $password = $_POST['pass'];
 
     // Consultar en la base de datos
     $query = "SELECT * FROM registro WHERE usuario = '$usuario'";
