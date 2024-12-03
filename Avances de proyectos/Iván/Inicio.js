@@ -88,5 +88,5 @@ function changeBackgroundColor(weather) {
 // Función de logout
 function logout() {
     sessionStorage.removeItem("loggedIn");
-    window.location.href = "login.html";
+    window.location.href = "index.php";
 }
