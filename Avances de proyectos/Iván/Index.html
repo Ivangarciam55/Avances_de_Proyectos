@@ -5,49 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicio de Sesión</title>
   <style>
-    /* Estilo general */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
     body {
       font-family: "Roboto", sans-serif;
       background-color: #ecf0f1;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
+      margin: 0;
     }
-    header {
-      background-color: #2c3e50;
-      color: white;
-      width: 100%;
-      text-align: center;
-      padding: 20px 0;
-      margin-bottom: 20px;
-    }
-    .login-form {
+    .container {
       background: #ffffff;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      width: 300px;
       text-align: center;
+      width: 300px;
     }
-    .login-form h1 {
+    .container h1 {
       color: #2c3e50;
       margin-bottom: 20px;
     }
-    .login-form input {
-      width: 100%;
+    .container form {
+      display: flex;
+      flex-direction: column;
+    }
+    .container input {
       padding: 10px;
-      margin-bottom: 15px;
+      margin: 10px 0;
       border: 1px solid #bdc3c7;
       border-radius: 5px;
     }
-    .login-form button {
+    .container button {
       background-color: #f39c12;
       color: white;
       border: none;
@@ -56,8 +45,15 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-    .login-form button:hover {
+    .container button:hover {
       background-color: #e67e22;
+    }
+    .container a {
+      color: #f39c12;
+      text-decoration: none;
+    }
+    .container a:hover {
+      text-decoration: underline;
     }
     .error {
       color: red;
@@ -66,21 +62,17 @@
   </style>
 </head>
 <body>
-<!-- Header -->
-<header>
-  <h1>Inicio de Sesión</h1>
-</header>
-
-<!-- Formulario de Login -->
-<div class="login-form">
-  <?php if (isset($error)): ?>
+<div class="container">
+  <h1>Iniciar Sesión</h1>
+  <?php if (!empty($error)): ?>
   <p class="error"><?= $error ?></p>
   <?php endif; ?>
-  <form method="POST" action="login.php">
+  <form action="login.php" method="POST">
     <input type="text" name="usuario" placeholder="Usuario" required>
     <input type="password" name="password" placeholder="Contraseña" required>
-    <button type="submit">Iniciar Sesión</button>
+    <button type="submit">Entrar</button>
   </form>
+  <p>¿No tienes cuenta? <a href="registro.html">Regístrate</a></p>
 </div>
 </body>
 </html>
