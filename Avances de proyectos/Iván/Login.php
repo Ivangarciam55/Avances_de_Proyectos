@@ -1,25 +1,33 @@
 <?php
 $error = "";
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Configuración de conexión a la base de datos
     $host = "localhost";
     $dbname = "weatherapp";
     $username = "root";
     $password = "";
 
+    // Crear conexión
     $conn = new mysqli($host, $username, $password, $dbname);
 
+    // Verificar conexión
     if ($conn->connect_error) {
         die("Error de conexión: " . $conn->connect_error);
     }
 
+    // Obtener los datos del formulario
     $usuario = $conn->real_escape_string($_POST['usuario']);
     $password = $_POST['password'];
 
+    // Consultar en la base de datos
     $query = "SELECT * FROM registro WHERE usuario = '$usuario'";
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
+
+        // Verificar la contraseña
         if (password_verify($password, $row['pass'])) {
             header("Location: Inicio.html");
             exit();
@@ -30,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $error = "Usuario no encontrado.";
     }
 
+    // Cerrar conexión
     $conn->close();
 }
 ?>
