@@ -142,5 +142,12 @@ async function fetchWeatherByCoordinates(lat, lon) {
     }
 }
 
+// Función de cierre de sesión
+function logout() {
+    alert("Sesión cerrada.");
+    // Aquí podrías redirigir al usuario a una página de inicio de sesión, por ejemplo:
+    window.location.href = "login.html";
+}
+
 // Llamamos a la función para obtener la ubicación cuando se carga la página
 window.addEventListener("load", getUserLocation);
