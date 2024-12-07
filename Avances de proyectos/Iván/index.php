@@ -48,6 +48,7 @@
         .login-container input[type="text"],
         .login-container input[type="password"] {
             width: 100%;
+            box-sizing: border-box;
             padding: 12px;
             margin: 10px 0;
             border: 1px solid #bdc3c7;
@@ -73,6 +74,7 @@
             border-radius: 8px;
             transition: background 0.3s ease, transform 0.2s ease;
             width: 100%;
+            box-sizing: border-box;
         }
 
         .login-container button:hover {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión</title>
+    <title>Registro</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
@@ -48,6 +48,7 @@
         .login-container input[type="text"],
         .login-container input[type="password"] {
             width: 100%;
+            box-sizing: border-box;
             padding: 12px;
             margin: 10px 0;
             border: 1px solid #bdc3c7;
@@ -73,6 +74,7 @@
             border-radius: 8px;
             transition: background 0.3s ease, transform 0.2s ease;
             width: 100%;
+            box-sizing: border-box;
         }
 
         .login-container button:hover {
@@ -117,7 +119,7 @@
 </head>
 <body>
 <div class="login-container">
-    <h1>Inicia Sesión</h1>
+    <h1>Registro</h1>
     <?php if (isset($_GET['error'])): ?>
         <p class="error-message"><?= htmlspecialchars($_GET['error']) ?></p>
     <?php endif; ?>
